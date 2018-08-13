@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const requiredFields = ['title', 'contents', 'author',];
+    const requiredFields = ['title', 'content', 'author'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-    const requiredFields = ["id", "title", "content", "author", "publishDate"];
+    const requiredFields = ["id", "title", "content", "author"];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -57,37 +57,9 @@ router.put("/:id", (req, res) => {
     res.status(204).end();
 });
 
-router.put("/:id", (req, res) => {
-  const requiredFields = ["id", "title", "content", "author", "publishDate"];
-  for (let i = 0; i < requiredFields.length; i++) {
-    const field = requiredFields[i];
-    if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`;
-      console.error(message);
-      return res.status(400).send(message);
-    }
-  }
-  if (req.params.id !== req.body.id) {
-    const message = `Request path id (${
-      req.params.id
-    }) and request body id ``(${req.body.id}) must match`;
-    console.error(message);
-    return res.status(400).send(message);
-  }
-  console.log(`Updating blog post with id \`${req.params.id}\``);
-  Blogs.update({
-    id: req.params.id,
-    title: req.body.title,
-    content: req.body.content,
-    author: req.body.author,
-    publishDate: req.body.publishDate
-  });
-  res.status(204).end();
-});
-
 router.delete("/:id", (req, res) => {
     Blogs.delete(req.params.id);
-    console.log(`Deleted blog post with id \`${req.params.ID}\``);
+    console.log(`Deleted blog post with id \`${req.params.id}\``);
     res.status(204).end();
 });
 
