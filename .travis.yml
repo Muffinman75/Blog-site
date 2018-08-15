@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: kJQFcYJyFIuVRVE9rXnQgRZ/xBpPGNZOuZxNKiIA03t97j62fgaEDR2h3URZyHrChxmUdVb7Ew7Jf5x1tupkzcExpR2cnoJUrv7bQVvDgYIBX96jOnhFDFriDSee+udlFGvgjAJoSRQyv/JY2WYCUAtk7lH5BL6kVJ8Mom/fVjoVYRqaH6hCPinwmU+eYbG6xS+iGsPicHVzDq+jswGXSENhkeNE6b16zvCn2xkhHTtEfxmVPNum/40s+mxebjeBNzHm1+b8y6eIfdgt7IL19/lDsKomUWfi0vZqjCLXLSeyPlaNeMAX74LM6PhDfiVCTXRRFSwaZv/vPvZN2XF5GUdPHmyCqhaJexE7H6tGFLI/LFpgf9pKUdXjr8cJl9tKBA5x+0SzXyxz0Ntm0cBU2PVTQ3kmXakEZjUTeU4ZJf0z3E2ziLoAVRvXrdYy9TOtoWS4kv8JCJzWhqtNYjZ1oRr+1h0hJF4T7Cl/FXOdzDTsrgvlYj/XowAo+JQGsYKQyxcrD8ZhN2fwWhIT0pqE4c8TGEdG8lIIPtemla0Cm+hd7ytE5rzBiSpm3gT58PXKHymeKfIEfYh82npIsQq2Fygr0Lps+WpxSKQyQJOJjyfRBxTZRLgNHxj7K9guTFAk+tab3jUTHgnLhagGQcEGjxAYWe9jtwfhcbMjzah7ris=
+  app: thawing-peak-98386
+  on:
+    repo: Muffinman75/Blog-site
