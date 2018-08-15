@@ -36,7 +36,7 @@ describe('Blogs', function() {
             .then(function(res) {
                 expect(res).to.have.status(201);
                 expect(res).to.be.json;
-                expect(res.body).to.include.keys('title', 'content', 'author');
+                expect(res.body).to.include.keys('title', 'content', 'author', 'publishDate');
                 expect(res.body.id).to.not.equal(null);
                 expect(res.body).to.deep.equal(Object.assign(newBlog, {id: res.body.id}));
             });
