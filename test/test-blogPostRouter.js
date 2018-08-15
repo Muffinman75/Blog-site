@@ -9,10 +9,10 @@ chai.use(chaihttp);
 
 describe('Blogs', function() {
     before(function() {
-        return runServer;
+        return runServer();
     });
     after(function() {
-        return closeServer;
+        return closeServer();
     });
     it('should list blogs on GET', function() {
         return chai.request(app)
