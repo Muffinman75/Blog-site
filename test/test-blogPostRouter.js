@@ -21,6 +21,11 @@ describe('Blogs', function() {
             expect(res).to.have.status(200);
             expect(res).to.be.json;
             expect(res).to.be.a('array');
+            expect(res.body.length).to.be.above(0);
+            res.body.forEach(function(blog) {
+                expect(item).to.be.a('object');
+                expect(item).to.have.all.keys('title', 'content', 'author');
+            });
         });
     });
     it('should add a blog on POST', function() {
