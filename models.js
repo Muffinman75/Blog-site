@@ -12,7 +12,8 @@ const blogSchema = mongoose.Schema({
     author: {
         firstName: { type: String, required: true },
         lastName: { type: String, required: true }
-    }
+    },
+    created: Date
 });
 
 blogSchema.virtual('authorName').get(function() {
@@ -24,7 +25,8 @@ blogSchema.methods.serialize = function() {
         id: this._id,
         title: this.title,
         content: this.content,
-        author: this.authorName
+        author: this.authorName,
+        created: this.date
     };
 };
 

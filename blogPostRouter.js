@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Blogs.findById(req.params.id)
+    Blogs.findOneById(req.params.id)
         .then(blog => res.json(blog.serialize()))
         .catch(err => {
             console.error(err);
