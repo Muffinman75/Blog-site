@@ -16,7 +16,7 @@ describe('Blogs', function() {
     });
     it('should list blogs on GET', function() {
         return chai.request(app)
-        .get('/blog-posts')
+        .get('/blogs')
         .then(function(res) {
             expect(res).to.have.status(200);
             expect(res).to.be.json;
@@ -31,7 +31,7 @@ describe('Blogs', function() {
     it('should add a blog on POST', function() {
         const newBlog = {title: 'How To Write A Blog', content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', author: 'Muffin'};
         return chai.request(app)
-            .post('/blog-posts')
+            .post('/blogs')
             .send(newBlog)
             .then(function(res) {
                 expect(res).to.have.status(201);
@@ -45,7 +45,7 @@ describe('Blogs', function() {
     });
     it('should update a blog on PUT', function() {
         return chai.request(app)
-            .get('/blog-posts')
+            .get('/blogs')
             .then(function(res) {
                 const updateData = Object.assign(res.body[0], {
                     title: 'What is Lorem Ipsum?',
@@ -53,7 +53,7 @@ describe('Blogs', function() {
                 });
                 updateData.id = res.body[0].id;
                 return chai.request(app)
-                    .put(`/blog-posts/${updateData.id}`)
+                    .put(`/blogs/${updateData.id}`)
                     .send(updateData)
             })
             .then(function(res) {
@@ -63,10 +63,10 @@ describe('Blogs', function() {
 
     it('should delete a blog on DELETE', function() {
         return chai.request(app)
-        .get('/blog-posts')
+        .get('/blogs')
         .then(function(res) {
             return chai.request(app)
-                .delete(`/blog-posts/${res.body[0].id}`);
+                .delete(`/blogs/${res.body[0].id}`);
         })
         .then(function(res) {
             expect(res).to.have.status(204);

@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { Blogs } = require('./models');
 
-router.get('/blogs', (req, res) => {
+router.get('/', (req, res) => {
     Blogs.find().limit(3)
         .then(blogs => {
             res.json({
@@ -14,11 +14,11 @@ router.get('/blogs', (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            rres.status(500).json({ message: 'Internal server error'});
+            res.status(500).json({ message: 'Internal server error'});
         });
 });
 
-router.get('/blogs/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Blogs.findById(req.params.id)
         .then(blog => res.json(blog.serialize()))
         .catch(err => {
@@ -27,7 +27,7 @@ router.get('/blogs/:id', (req, res) => {
         });
 });
 
-router.post('/blogs', (req, res) => {
+router.post('/', (req, res) => {
     const requiredFields = ['title', 'content', 'author'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
@@ -50,7 +50,7 @@ router.post('/blogs', (req, res) => {
         });
 });
 
-router.put('/blogs/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         const message = `Request path id (${req.params.id}) and request body id ` + `(${req.body.id}) must match`;
         console.error(message);
@@ -70,7 +70,7 @@ router.put('/blogs/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Internal server error'}));
 });
 
-router.delete('/blogs/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     Blogs.findByIdAndRemove(req.params.id)
     .then(blog => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Internal server error'}));

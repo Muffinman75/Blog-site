@@ -3,16 +3,18 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require('mongoose');
+const blogPostRouter = require('./blogPostRouter');
 const { PORT, DATABASE_URL } = require('./config');
 const app = express();
 
 app.use(morgan("common"));
 app.use(express.json());
+app.use('/blogs', blogPostRouter);
 
 let server;
 
 function runServer(databaseUrl, port = PORT) {
-    return new Promise((resolve, reject) {
+    return new Promise((resolve, reject) => {
         mongoose.connect(
             databaseUrl,
             err => {
@@ -34,7 +36,7 @@ function runServer(databaseUrl, port = PORT) {
 }
 
 function closeServer() {
-    return mongoose.disconnect().then(() {
+    return mongoose.disconnect().then(() => {
         return new Promise((resolve, reject) => {
             console.log('Closing server');
             server.close(err => {

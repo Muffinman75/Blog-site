@@ -7,12 +7,11 @@ mongoose.Promise = global.Promise;
 const uuid = require('uuid');
 
 const blogSchema = mongoose.Schema({
-    title: { type: string, required: true },
-    content: { type: string, required: true },
+    title: { type: String, required: true },
+    content: { type: String, required: true },
     author: {
-        firstName: string,
-        lastName: string,
-        required: true
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true }
     }
 });
 
