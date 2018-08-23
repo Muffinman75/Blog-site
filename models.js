@@ -6,14 +6,36 @@ mongoose.Promise = global.Promise;
 
 const uuid = require('uuid');
 
+const commentSchema = ({ content: 'string'});
+
+//const timeStamps = ({ timestamps:  true });
+
+const authorSchema = ({
+    firstName: { type: String },
+    lastName: { type: String },
+    userName: {
+        type: 'string',
+        unique: true
+    }
+});
+
 const blogSchema = mongoose.Schema({
     title: { type: String, required: true },
     content: { type: String, required: true },
-    author: {
-        firstName: { type: String, required: true },
-        lastName: { type: String, required: true }
-    },
-    created: Date
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'Author' },
+    //created: { type: Date, default: Date.now },
+    comments: [commentSchema]
+    // created: new Date()
+});
+
+blogSchema.pre('find', function(next) {
+    this.populate('author');
+    next();
+});
+
+blogSchema.pre('findOne', function(next) {
+    this.populate('author');
+    next();
 });
 
 blogSchema.virtual('authorName').get(function() {
@@ -26,10 +48,13 @@ blogSchema.methods.serialize = function() {
         title: this.title,
         content: this.content,
         author: this.authorName,
-        created: this.date
+        comments: this.comments,
+        //created: this.date
     };
 };
 
-const Blogs = mongoose.model('Blogs', blogSchema);
+const Author = mongoose.model('Author', authorSchema);
+// third arg in Blogs is collection name
+const Blogs = mongoose.model('Blogs', blogSchema, 'blogposts');
 
-module.exports = { Blogs };
+module.exports = { Blogs, Author };

@@ -4,12 +4,14 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require('mongoose');
 const blogPostRouter = require('./blogPostRouter');
+const authorRouter = require('./authorRouter');
 const { PORT, DATABASE_URL } = require('./config');
 const app = express();
 
 app.use(morgan("common"));
 app.use(express.json());
 app.use('/blogs', blogPostRouter);
+app.use('/authors', authorRouter);
 
 let server;
 
