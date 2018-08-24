@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-const { Blogs, Author } = require('./models');
+const { Blogposts, Author } = require('./models');
 
 router.get('/', (req, res) => {
     Author.find().then(authors => {
@@ -83,7 +83,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    Blogs.remove({ author: req.params.id })
+    Blogposts.remove({ author: req.params.id })
     .then(() => {
         Author.findByIdAndRemove(req.params.id)
         .then(() => {

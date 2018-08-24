@@ -10,7 +10,7 @@ const app = express();
 
 app.use(morgan("common"));
 app.use(express.json());
-app.use('/blogs', blogPostRouter);
+app.use('/blogposts', blogPostRouter);
 app.use('/authors', authorRouter);
 
 let server;

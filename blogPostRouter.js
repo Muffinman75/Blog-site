@@ -2,10 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-const { Blogs, Author } = require('./models');
+const { Blogposts, Author } = require('./models');
 
 router.get('/', (req, res) => {
-    Blogs.find()
+    Blogposts.find()
     .limit(11)
     .then(blogs => {
         res.json({
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Blogs.findById(req.params.id)
+    Blogposts.findById(req.params.id)
         .then(blog => {
             res.json({
                 title: blog.title,
@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
     Author.findById(req.body.author_id)
     .then(author => {
         if (author) {
-            Blogs
+            Blogposts
                 .create({
                     title: req.body.title,
                     content: req.body.content,
@@ -94,7 +94,7 @@ router.put('/:id', (req, res) => {
         }
     });
 
-    Blogs.findByIdAndUpdate(req.params.id, { $set: toUpdate }, { new: true })
+    Blogposts.findByIdAndUpdate(req.params.id, { $set: toUpdate }, { new: true })
     .then(updatedPost => res.status(200).json({
         id: updatedPost.id,
         title: updatedPost.title,
@@ -105,7 +105,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    Blogs.findByIdAndRemove(req.params.id)
+    Blogposts.findByIdAndRemove(req.params.id)
     .then(blog => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Internal server error'}));
 });

@@ -54,7 +54,7 @@ blogSchema.methods.serialize = function() {
 };
 
 const Author = mongoose.model('Author', authorSchema);
-// third arg in Blogs is collection name
-const Blogs = mongoose.model('Blogs', blogSchema, 'blogposts');
+// third arg in Blogposts is collection name
+const Blogposts = mongoose.model('Blogposts', blogSchema, 'blogposts');
 
-module.exports = { Blogs, Author };
+module.exports = { Blogposts, Author };
