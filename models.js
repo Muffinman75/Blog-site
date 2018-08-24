@@ -11,7 +11,6 @@ const commentSchema = ({ content: 'string'});
 //const timeStamps = ({ timestamps:  true });
 
 const authorSchema = ({
-    _id: { type: String },
     firstName: { type: String },
     lastName: { type: String },
     userName: {
@@ -56,6 +55,6 @@ blogSchema.methods.serialize = function() {
 
 const Author = mongoose.model('Author', authorSchema);
 // third arg in Blogposts is collection name
-const Blogposts = mongoose.model('Blogposts', blogSchema, 'blogposts');
+const Blogs = mongoose.model('Blogs', blogSchema, 'blogposts');
 
-module.exports = { Blogposts, Author };
+module.exports = { Blogs, Author };
