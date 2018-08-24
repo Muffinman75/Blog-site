@@ -11,6 +11,7 @@ const commentSchema = ({ content: 'string'});
 //const timeStamps = ({ timestamps:  true });
 
 const authorSchema = ({
+    _id: { type: String },
     firstName: { type: String },
     lastName: { type: String },
     userName: {
