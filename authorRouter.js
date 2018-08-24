@@ -65,33 +65,21 @@ router.put('/:id', (req, res) => {
             error: 'Request path id and request body id must match'
         });
     }
-    const updated = [];
+    const updated = {};
     const updateableFields = ['firstName', 'lastName', 'userName'];
     updateableFields.forEach(field => {
         if (field in req.body) {
             updated[field] = req.body[field];
         }
     });
-    Author.findOne({ userName: updated.userName || '', id: { $ne:
-    req.params.id } })
-    .then(author => {
-        if (author) {
-            const message = `Username already taken`;
-            console.error(message);
-            return res.status(400).send(message);
-        }
-        else {
-            Author.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
-            .then(updatedAuthor => {
-                res.status(200).json({
-                    id: updatedAuthor.id,
-                    name: `${updatedAuthor.firstName} ${updatedAuthor.lastName}`,
-                    userName: updatedAuthor.userName
-                });
-            })
-            .catch(err => res.status(500).json({ message: err }));
-        }
-    });
+    console.log(updated);
+    Author.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+    .then(updatedAuthor => res.status(200).json({
+        _id: req.params.id,
+        name: `${updatedAuthor.firstName} ${updatedAuthor.lastName}`,
+        userName: updatedAuthor.userName
+    }))
+    .catch(err => res.status(500).json({ message: 'Internal server error'}));
 });
 
 router.delete('/:id', (req, res) => {

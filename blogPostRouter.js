@@ -20,10 +20,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Blogs.findById(req.params._id)
+    Blogs.findById(req.params.id)
         .then(blog => {
             res.json({
-                id: blog._id,
                 title: blog.title,
                 content: blog.content,
                 author: blog.authorName,
@@ -99,7 +98,8 @@ router.put('/:id', (req, res) => {
     .then(updatedPost => res.status(200).json({
         id: updatedPost.id,
         title: updatedPost.title,
-        content: updatedPost.content
+        content: updatedPost.content,
+        author: updatedPost.author
     }))
     .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
